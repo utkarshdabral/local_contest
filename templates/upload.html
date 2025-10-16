@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Upload Code</title>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-xl w-96">
+        <h3 class="text-2xl font-semibold text-center text-blue-400 mb-6">Submit Your Code</h3>
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <input type="file" name="file" class="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0 file:text-sm file:font-semibold
+                file:bg-blue-600 file:text-white hover:file:bg-blue-700" required>
+            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded-lg font-semibold">
+                Upload
+            </button>
+        </form>
+        <div class="text-center mt-4">
+            <a href="/" class="text-gray-400 hover:text-white text-sm">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
