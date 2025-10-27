@@ -1,114 +1,99 @@
-# Local Contest — run coding contests on your LAN (no internet, no drama)
+#   
 
-**TL;DR:** Local Contest is a lightweight, local-first platform to host coding contests over a shared Wi-Fi/LAN. Organisers can create problems, participants submit solutions via the web UI, and the repo includes a plagiarism-checking helper to detect copy-paste shenanigans. Perfect for hackathons, college contests, and smugly offline vibes.
+# Local Contest
 
-* * *
+# 
 
-## What this is (short & honest)
-
-*   A small Flask-ish web app (inferred) that serves contest pages from `templates/`.
-    
-*   Uploads (submissions) are saved in `uploads/`.
-    
-*   `plag.py` is a plagiarism utility that compares submissions and flags suspicious matches.
-    
-*   Minimal, local-first, easy to run — no cloud required. Great for when you want to host a contest but the internet wants a break.
-    
+**Runing coding contests locally**
 
 * * *
 
-## Features (smart)
+## What is this?
 
-*   Host contests over local network — participants connect to the organiser’s machine.
-    
-*   Upload and store submissions in `uploads/`.
-    
-*   Run a plagiarism check across submissions (scripted utility).
-    
-*   Simple HTML templates for quick customization.
-    
+# 
 
-## Why you’d use this (witty)
+**Local Contest** is a lightweight platform to **host coding competitions over a shared LAN/Wi-Fi network**.  
+Organisers can create problems, participants submit code, and a built-in plagiarism checker ensures fair play.
 
-*   Because “everyone open your GitHub” is a terrible game to play with 50 students.
+It’s perfect for **college events, hackathons, or LAN-based coding battles** when Wi-Fi betrays you .
+
+* * *
+
+## Features
+
+# 
+
+*   **Local hosting:** Runs completely offline — participants connect via the same Wi-Fi/LAN.
     
-*   Because local > latency drama.
+*   **Simple UI:** Clean and minimal HTML templates for easy use.
     
-*   Because you like bragging rights for running a contest that survived a router tantrum.
+*   **File uploads:** Participants can submit their solutions directly.
+    
+*   **Plagiarism check:** Detects code similarity using `plag.py`.
+    
+*   **Lightweight & Fast:** No heavy dependencies or database needed.
     
 
 * * *
 
-## Tech stack (inferred)
+## Tech Stack
 
-*   Python 3.8+
+# 
+
+*   **Backend:** Python (Flask)
     
-*   Flask (or a micro web framework)
+*   **Frontend:** HTML, CSS (templates-based)
     
-*   Jinja2 templates (in `templates/`)
+*   **Storage:** Local file system (`uploads/` folder)
     
-*   Simple file-based storage (`uploads/`)
-    
-*   A plagiarism helper script (`plag.py`) — can be extended with more advanced comparators (JPlag, MOSS, difflib, Levenshtein, etc.)
-    
-
-* * *
-
-## Quick start (assumptions)
-
-> These commands assume a typical Flask-style app structure. Adjust if your code differs.
-
-1.  Clone the repo
-    
-
-`git clone https://github.com/utkarshdabral/local_contest.git cd local_contest`
-
-2.  Create & activate a virtualenv
-    
-
-`python3 -m venv venv source venv/bin/activate   # macOS / Linux venv\Scripts\activate      # Windows`
-
-3.  Install dependencies (if you have a `requirements.txt` add it; otherwise install likely deps):
-    
-
-`pip install flask # optionally: # pip install python-Levenshtein difflib3`
-
-4.  Create uploads folder if not present:
-    
-
-`mkdir -p uploads`
-
-5.  Run the web app:
-    
-
-`python app.py # or FLASK_APP=app.py flask run --host=0.0.0.0 --port=5000`
-
-6.  Visit on LAN (organiser machine IP): `http://<organiser-ip>:5000`
+*   **Utility:** Custom plagiarism checker (`plag.py`)
     
 
 * * *
 
-## Plagiarism utility (what it likely does)
+## Project Structure
 
-*   `plag.py` scans files in `uploads/` (or given paths) and compares them pairwise, printing similarity scores or flags.
-    
-*   You can extend it with:
-    
-    *   Tokenization, identifier renaming normalization
-        
-    *   Structural comparison (AST)
-        
-    *   Integrate with JPlag / MOSS for heavy lifting
-        
+# 
 
-**Run (example)**
-
-`python plag.py uploads/sub1.py uploads/sub2.py # or to run a batch check: python plag.py --dir uploads/`
-
-_(If actual CLI flags differ, I’ll update this once I can read the file.)_
+`local_contest/ ├── app.py           # Main web app (routes, uploads, and serving pages) ├── plag.py          # Code similarity checker ├── templates/       # HTML templates (organiser, participant, results) └── uploads/         # Submissions folder`
 
 * * *
 
-## Project structure (observed)
+## How It Works
 
-`local_contest/ ├─ app.py         # main web app (routes, upload handling) ├─ plag.py        # plagiarism comparison utility ├─ templates/     # HTML templates for UI └─ uploads/       # where user submissions live`
+# 
+
+1.  The organiser runs `app.py` on their machine.
+    
+2.  Participants connect using the organiser’s local IP (e.g., `192.168.x.x:5000`).
+    
+3.  They submit their code via the web interface.
+    
+4.  The organiser runs `plag.py` to check for suspiciously similar submissions.
+    
+5.    
+    
+
+* * *
+
+## Setup & Usage
+
+# 
+
+`# Clone the repo git clone https://github.com/utkarshdabral/local_contest.git cd local_contest  # Create a virtual environment python -m venv venv source venv/bin/activate  # (Windows: venv\Scripts\activate)  # Install dependencies pip install flask  # Run the app python app.py`
+
+Now open your browser and visit →  
+👉 `http://localhost:5000` _(for organiser)_  
+👉 `http://<your-local-ip>:5000` _(for participants)_
+
+* * *
+
+## Plagiarism Check
+
+# 
+
+To compare submissions in the `uploads/` folder:
+
+`python plag.py`
+
+It will detect and report similarity between files, saving you from copy-paste crimes.
